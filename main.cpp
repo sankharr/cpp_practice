@@ -1,46 +1,56 @@
 #include <iostream>
-
-using namespace std;
-
-class ThreeNos{
+class Time
+{
 private:
-    int n1,n2,n3;
+    int h,m,s;
 public:
-    ThreeNos():n1(0),n2(0),n3(0){};
-    ThreeNos(int x,int y, int z):n1(x),n2(y),n3(z){};
-    int getMax(int x,int y,int z){
-        if(x>y && x>z)
-            return x;
-        else if(y>x && y>z)
-            return y;
-        else
-            return z;
+    Time(){
+        h=0, m=0; s=0;
     }
-    int getMin(int x,int y,int z){
-        if(x<y && x<z)
-            return x;
-        else if(y<x && y<z)
-            return y;
-        else
-            return z;
+    void getTime();
+    void show(){
+        std::cout<<h<<":"<<m<<":"<<s;
     }
-    int sum(){
-        return n1+n2+n3;
-    }
-    float average(){
-        return (sum()/3);
-    }
-
-
+    Time operator+(Time); //overloading '+' operator
 };
+Time Time::operator+(Time t1)
+//operator function
+{
+    Time t;
+    int a,b;
+    a=s+t1.s;
+    t.s=a%60;
+    b=(a/60)+m+t1.m;
+    t.m=b%60;
+    t.h=(b/60)+h+t1.h;
+    t.h=t.h%12;
 
-int main(){
-
-    ThreeNos tn1(5,9,7);
-    cout << "max - " <<tn1.getMax(5,9,7) << "\n";
-    cout << "min - " <<tn1.getMin(5,9,7) << "\n";
-    cout << "sum - " <<tn1.sum() << "\n";
-    cout << "avg - " <<tn1.average() << "\n";
-
-    return 0;
+    return t;
+}
+void Time::getTime()
+{
+    std::cout<<"\n Enter the hour(0-11) ";
+    std::cin>>h;
+    std::cout<<"\n Enter the minute(0-59) ";
+    std::cin>>m;
+    std::cout<<"\n Enter the second(0-59) ";
+    std::cin>>s;
+}
+int main()
+{
+    Time t1,t2,t3,t4;
+    std::cout<<"\n Enter the first time ";
+    t1.getTime();
+    std::cout<<"\n Enter the second time ";
+    t2.getTime();
+    std::cout<<"\n Enter the third time ";
+    t4.getTime();
+    t3=t1+t2+t4;
+//adding of two time object using '+' operator
+    std::cout<<"\n First time ";
+    t1.show();
+    std::cout<<"\n Second time ";
+    t2.show();
+    std::cout<<"\n Sum of times ";
+    t3.show();
 }

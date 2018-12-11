@@ -2,52 +2,45 @@
 
 using namespace std;
 
-class Shape{
-protected:
-    float width,height;
-public:
-    Shape(float w, float h);
-    void set_data(float a,float b){
-        width = a; height = b;
-    }
-};
-
-Shape::Shape(float w, float h){
-    width = w; height = h;
-}
-
-class Rectangle: public Shape{
-
+class ThreeNos{
 private:
-    float calculateArea(){
-        return ((width*height));
- }
-
+    int n1,n2,n3;
 public:
-    void displayArea(){
-        cout << "Rec - " << calculateArea() << "\n";
+    ThreeNos():n1(0),n2(0),n3(0){};
+    ThreeNos(int x,int y, int z):n1(x),n2(y),n3(z){};
+    int getMax(int x,int y,int z){
+        if(x>y && x>z)
+            return x;
+        else if(y>x && y>z)
+            return y;
+        else
+            return z;
+    }
+    int getMin(int x,int y,int z){
+        if(x<y && x<z)
+            return x;
+        else if(y<x && y<z)
+            return y;
+        else
+            return z;
+    }
+    int sum(){
+        return n1+n2+n3;
+    }
+    float average(){
+        return (sum()/3);
     }
 
-    Rectangle(int i, int i1) : Shape(i,i1){};
-};
 
-class Triangle: public Shape{
-
-private:
-    float calculateArea(){
-        return ((width*height)/2);
-    }
-public:
-    void displayArea(){
-        cout << "Tri - " << calculateArea() << "\n";
-    }
-
-    Triangle(float d, float d1) : Shape(d, d1){};
 };
 
 int main(){
-    Triangle Triangle1(2.0,3.0);
-    Rectangle rec(4,5);
-    Triangle1.displayArea();
-    rec.displayArea();
+
+    ThreeNos tn1(5,9,7);
+    cout << "max - " <<tn1.getMax(5,9,7) << "\n";
+    cout << "min - " <<tn1.getMin(5,9,7) << "\n";
+    cout << "sum - " <<tn1.sum() << "\n";
+    cout << "avg - " <<tn1.average() << "\n";
+
+    return 0;
 }

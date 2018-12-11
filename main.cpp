@@ -2,59 +2,52 @@
 
 using namespace std;
 
-class Circle{
-private:
-    int radius;
-    float CalculateArea(void);
-
+class Shape{
+protected:
+    float width,height;
 public:
-    int colour;
-    Circle(int r);
-    void SetRadius(int r);
-    void SetRadius(int r,int c);
-    int GetRadius(void);
-    void displayArea(void);
-    ~Circle(){}
+    Shape(float w, float h);
+    void set_data(float a,float b){
+        width = a; height = b;
+    }
 };
 
-Circle::Circle(int r) {
-    radius = r;
-    colour = 0;
+Shape::Shape(float w, float h){
+    width = w; height = h;
 }
 
-void Circle::SetRadius(int r) {
-    radius = r;
-    colour = 255;
-}
+class Rectangle: public Shape{
 
-void Circle::SetRadius(int r, int c) {
-    radius = r;
-    colour = c;
-}
+private:
+    float calculateArea(){
+        return ((width*height));
+ }
 
-int Circle::GetRadius(void){
-    return radius;
-}
+public:
+    void displayArea(){
+        cout << "Rec - " << calculateArea() << "\n";
+    }
 
-float Circle::CalculateArea() {
-    return 3.14*radius*radius;
-}
+    Rectangle(int i, int i1) : Shape(i,i1){};
+};
 
-void Circle::displayArea(void){
-    cout << "area - " << CalculateArea() << "\n";
-}
+class Triangle: public Shape{
 
+private:
+    float calculateArea(){
+        return ((width*height)/2);
+    }
+public:
+    void displayArea(){
+        cout << "Tri - " << calculateArea() << "\n";
+    }
 
+    Triangle(float d, float d1) : Shape(d, d1){};
+};
 
 int main(){
-
-    Circle MyCircle(10);
-    cout << "radius is - " << MyCircle.GetRadius() << "\n";
-    cout << MyCircle.colour << "\n";
-    MyCircle.SetRadius(20);
-    cout << MyCircle.GetRadius() << "\n";
-    MyCircle.SetRadius(40,100);
-    MyCircle.displayArea();
-
-    return 0;
+    Triangle Triangle1(2.0,3.0);
+    Rectangle rec(4,5);
+    Triangle1.displayArea();
+    rec.displayArea();
 }

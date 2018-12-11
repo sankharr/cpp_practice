@@ -1,78 +1,59 @@
-//tut1 - q3
-
-//#include <iostream.h>
-#include <iomanip>
 #include <iostream>
-
-#define size 27
 
 using namespace std;
 
-// class declaration
-
-class stack{
+class Circle{
 private:
-    char array[size];
-    int top;
+    int radius;
+    float CalculateArea(void);
 
 public:
-    stack();
-    void load_stack();
-    void show_stack();
-    char pop();
-    void push(char);
-    //~stack();
+    int colour;
+    Circle(int r);
+    void SetRadius(int r);
+    void SetRadius(int r,int c);
+    int GetRadius(void);
+    void displayArea(void);
+    ~Circle(){}
 };
 
-stack::stack() {
-    //array = new int[size];
-    top = -1;
+Circle::Circle(int r) {
+    radius = r;
+    colour = 0;
 }
 
-void stack::load_stack() {
-    char cara = 'A';
-    for(int i = 0; i<27; i++){
-        top++;
-        array[top] = cara;
-        cara++;
-    }
+void Circle::SetRadius(int r) {
+    radius = r;
+    colour = 255;
 }
 
-void stack::show_stack() {
-    cout << "Contents in stack are - ";
-    for(int i = top; i>-1; i--){
-        cout << array[i] << " ";
-    }
-    cout << "\n";
+void Circle::SetRadius(int r, int c) {
+    radius = r;
+    colour = c;
 }
 
-void stack::push(char cara) {
-    top++;
-    array[top] = cara;
+int Circle::GetRadius(void){
+    return radius;
 }
 
-char stack::pop() {
-    char cara = array[top];
-    cout << "popped element is - " << cara << "\n";
-    top--;
-    return cara;
+float Circle::CalculateArea() {
+    return 3.14*radius*radius;
 }
 
+void Circle::displayArea(void){
+    cout << "area - " << CalculateArea() << "\n";
+}
 
-//stack::~stack() {
-//    delete []array;
-//
-//};
 
 
 int main(){
+    Circle MyCircle(10);
+    cout << "radius is - " << MyCircle.GetRadius() << "\n";
+    cout << MyCircle.colour << "\n";
+    MyCircle.SetRadius(20);
+    cout << MyCircle.GetRadius() << "\n";
+    MyCircle.SetRadius(40,100);
+    MyCircle.displayArea();
 
-    stack stack1;
-    stack1.load_stack();
-    stack1.show_stack();
-    stack1.pop();
-    stack1.push('s');
-    stack1.show_stack();
-
-
+    return 0;
 }
